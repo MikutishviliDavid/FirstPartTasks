@@ -1,6 +1,7 @@
-using NUnit.Framework;
+﻿using NUnit.Framework;
+using TwoChairsTasksLib;
 
-namespace FirstPartTasks.UnitTests
+namespace TwoChairsTaskTestsLib
 {
     public class TwoChairsTaskTests
     {

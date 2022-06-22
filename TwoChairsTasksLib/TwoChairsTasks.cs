@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace FirstPartTasks
+namespace TwoChairsTasksLib
 {
     public class TwoChairsTasks
     {
