@@ -2,45 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace TwoChairsTasksLib
+namespace TraineeTasks
 {
-    public class TwoChairsTasks
+    public class StringFirstPartTasks
     {
-        public string ChangeEvenBitsToZero(int number)
-        {
-            if (number < 0)
-            {
-                return "The number must be greater than zero";
-            }
-
-            var binary = Convert.ToString(number, 2);
-            string result = "";
-
-            for (int i = 0; i < binary.Length; i++)
-            {
-                result = (i % 2) != 0 ? result += 0 : result += binary[i];
-            }
-
-            return result;
-        }
-
-        public int FindCountBitsEqualOne(int number)
-        {
-            if (number < 0)
-            {
-                return -1;
-            }
-
-            var binary = Convert.ToString(number, 2);
-
-            return binary.Count(c => c == '1');
-        }
-
         public string ChangeLetterCase(string str)
         {
             if (String.IsNullOrEmpty(str))
             {
-                return "The string must not be Null or Empty";
+                throw new ArgumentException("The string cannot be null or empty string");
             }
 
             var result = "";
@@ -64,7 +34,7 @@ namespace TwoChairsTasksLib
         {
             if (String.IsNullOrEmpty(str))
             {
-                return "The string must not be Null or Empty";
+                throw new ArgumentException("The string cannot be null or empty string");
             }
 
             string[] words = str.Split(' ');
@@ -92,7 +62,7 @@ namespace TwoChairsTasksLib
         {
             if (String.IsNullOrEmpty(str))
             {
-                return "The string must not be Null or Empty";
+                throw new ArgumentException("The string cannot be null or empty string");
             }
 
             string[] words = str.Split(' ');
