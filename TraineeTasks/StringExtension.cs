@@ -5,14 +5,14 @@ namespace TraineeTasks
 {
     public static class StringExtension
     {
-        public static int GetNumberOccurrences(this string str, string substr)
+        public static int GetNumberOfOccurrences(this string str, string substr)
         {
-            if (String.IsNullOrEmpty(substr))
+            if (string.IsNullOrEmpty(substr))
             {
                 throw new ArgumentException(String.Format("{0} - cannot be null or emty", nameof(substr)));
             }
 
-            return Regex.Matches(str, substr).Count;
+            return str.Split(substr).Length - 1;
         }
     }
 }

@@ -3,14 +3,14 @@ using System;
 
 namespace TraineeTasks.UnitTests
 {
-    public class NumericFirstPartTaskTests
+    public class NumericTaskTests
     {
-        [TestCase(2657857, "1010001000101000000000")]
-        [TestCase(255, "10101010")]
-        public void WhenChangeEvenBitsToZero_ThenReturnStringWithEvenBitsAsZero(int number, string expected)
+        [TestCase(2657857, 2656768)]
+        [TestCase(255, 170)]
+        public void WhenChangeEvenBitsToZero_ThenReturnStringWithEvenBitsAsZero(int number, int expected)
         {
             // Arrange
-            var tasks = new NumericFirstPartTasks();
+            var tasks = new NumericTasks();
 
             // Act
             var actual = tasks.ChangeEvenBitsToZero(number);
@@ -22,7 +22,7 @@ namespace TraineeTasks.UnitTests
         [TestCase(-5)]
         public void WhenChangeEvenBitsToZero_ThenReturnThrows(int number)
         {
-            Assert.That(() => new NumericFirstPartTasks().ChangeEvenBitsToZero(number),
+            Assert.That(() => new NumericTasks().ChangeEvenBitsToZero(number),
                         Throws.TypeOf<ArgumentException>());
         }
 
@@ -31,7 +31,7 @@ namespace TraineeTasks.UnitTests
         public void WhenFindCountBitsEqualOne_ThenReturnCountBitsEqualOne(int number, int expected)
         {
             // Arrange
-            var tasks = new NumericFirstPartTasks();
+            var tasks = new NumericTasks();
 
             // Act
             var actual = tasks.FindCountBitsEqualOne(number);
@@ -43,7 +43,7 @@ namespace TraineeTasks.UnitTests
         [TestCase(-10)]
         public void WhenFindCountBitsEqualOne_ThenReturnThrows(int number)
         {
-            Assert.That(() => new NumericFirstPartTasks().FindCountBitsEqualOne(number),
+            Assert.That(() => new NumericTasks().FindCountBitsEqualOne(number),
                         Throws.TypeOf<ArgumentException>());
         }
     }

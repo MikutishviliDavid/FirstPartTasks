@@ -3,12 +3,14 @@ using System;
 
 namespace TraineeTasks.UnitTests
 {
-    public class RegexTasksTests
+    public class RegexTaskTests
     {
-        [TestCase("aahhuaa aahaa aahuuaa dggd ahuhu ahuhuuu", "aahhuaa, aahaa, ahuhu")]
-        [TestCase("aahHUaa aaHaa aahuuaa dggd", "aahHUaa, aaHaa")]
-        [TestCase("dggd", "There are no matches")]
-        public void WhenFindWords_ThenReturnTheseWords(string str, string expected)
+#pragma warning disable NUnit1001 // The individual arguments provided by a TestCaseAttribute must match the type of the corresponding parameter of the method
+        [TestCase("aahhuaa aahaa aahuuaa dggd ahuhu", new string[] { "aahhuaa", "aahaa", "ahuhu" })]
+        [TestCase("aahHUaa aaHaa aahuuaa dggd", new string[] { "aahHUaa", "aaHaa" })]
+        [TestCase("dggd", new string[] { })]
+#pragma warning restore NUnit1001 // The individual arguments provided by a TestCaseAttribute must match the type of the corresponding parameter of the method
+        public void WhenFindWords_ThenReturnTheseWords(string str, string[] expected)
         {
             // Arrange
             var tasks = new RegexTasks();
@@ -27,11 +29,11 @@ namespace TraineeTasks.UnitTests
             Assert.That(() => new RegexTasks().FindWords(str), Throws.TypeOf<ArgumentException>());
         }
 
-        [TestCase("+375 25 555 55 55", "+375 25 555 55 55")]
-        [TestCase("+375 44 444 44 44", "+375 44 444 44 44")]
-        [TestCase("+375 (44) 444-44-44", "It is not valid phone number")]
-        [TestCase("+375 25 555 55 558", "It is not valid phone number")]
-        public void WhenValidateBelarusianPhoneNumber_ThenReturnThisNumber(string phoneNumber, string expectedNumber)
+        [TestCase("+375 25 555 55 55", true)]
+        [TestCase("+375 44 444 44 44", true)]
+        [TestCase("+375 (44) 444-44-44", false)]
+        [TestCase("+375 25 555 55 558", false)]
+        public void WhenValidateBelarusianPhoneNumber_ThenReturnThisNumber(string phoneNumber, bool expected)
         {
             // Arrange
             var tasks = new RegexTasks();
@@ -40,7 +42,7 @@ namespace TraineeTasks.UnitTests
             var actual = tasks.ValidateBelarusianPhoneNumber(phoneNumber);
 
             // Assert
-            Assert.That(actual, Is.EqualTo(expectedNumber));
+            Assert.That(actual, Is.EqualTo(expected));
         }
 
         [TestCase("")]
@@ -50,10 +52,10 @@ namespace TraineeTasks.UnitTests
             Assert.That(() => new RegexTasks().ValidateBelarusianPhoneNumber(phoneNumber), Throws.TypeOf<ArgumentException>());
         }
 
-        [TestCase("https://metanit.com", "https://metanit.com")]
-        [TestCase("http://docs.microsoft.us", "http://docs.microsoft.us")]
-        [TestCase("https://docs.microsoft.ru", "It is not valid url")]
-        public void WhenValidateURL_ThenReturnThisURL(string url, string expectedUrl)
+        [TestCase("https://metanit.com", true)]
+        [TestCase("http://docs.microsoft.us", true)]
+        [TestCase("https://docs.microsoft.ru", false)]
+        public void WhenValidateURL_ThenReturnThisURL(string url, bool expected)
         {
             // Arrange
             var tasks = new RegexTasks();
@@ -62,7 +64,7 @@ namespace TraineeTasks.UnitTests
             var actual = tasks.ValidateURL(url);
 
             // Assert
-            Assert.That(actual, Is.EqualTo(expectedUrl));
+            Assert.That(actual, Is.EqualTo(expected));
         }
 
         [TestCase("")]

@@ -3,24 +3,16 @@ using System.Linq;
 
 namespace TraineeTasks
 {
-    public class NumericFirstPartTasks
+    public class NumericTasks
     {
-        public string ChangeEvenBitsToZero(int number)
+        public int ChangeEvenBitsToZero(int number)
         {
             if (number < 0)
             {
                 throw new ArgumentException("The number must not be less than zero");
             }
 
-            var binary = Convert.ToString(number, 2);
-            string result = "";
-
-            for (int i = 0; i < binary.Length; i++)
-            {
-                result = (i % 2) != 0 ? result += 0 : result += binary[i];
-            }
-
-            return result;
+            return (int)(number & 0xaaaaaaaa);
         }
 
         public int FindCountBitsEqualOne(int number)

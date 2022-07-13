@@ -3,14 +3,14 @@ using System;
 
 namespace TraineeTasks.UnitTests
 {
-    public class StringFirstPartTaskTests
+    public class StringTaskTests
     {
         [TestCase("Hello World!", "hELLO wORLD!")]
         [TestCase("DeVeLoPeR", "dEvElOpEr")]
         public void WhenChangeLetterCaseInString_ThenReturnStringWithChangedLetterCase(string str, string expected)
         {
             // Arrange
-            var tasks = new StringFirstPartTasks();
+            var tasks = new StringTasks();
 
             // Act
             var actual = tasks.ChangeLetterCase(str);
@@ -23,7 +23,7 @@ namespace TraineeTasks.UnitTests
         [TestCase(null)]
         public void WhenChangeLetterCaseInString_ThenReturnThrows(string str)
         {
-            Assert.That(() => new StringFirstPartTasks().ChangeLetterCase(str),
+            Assert.That(() => new StringTasks().ChangeLetterCase(str),
                         Throws.TypeOf<ArgumentException>());
         }
 
@@ -32,7 +32,7 @@ namespace TraineeTasks.UnitTests
         public void WhenReverseEachWordInString_ThenReturnStringWithReversedWords(string str, string expected)
         {
             // Arrange
-            var tasks = new StringFirstPartTasks();
+            var tasks = new StringTasks();
 
             // Act
             var actual = tasks.ReverseEachWord(str);
@@ -45,7 +45,7 @@ namespace TraineeTasks.UnitTests
         [TestCase(null)]
         public void WhenReverseEachWordInString_ThenReturnThrows(string str)
         {
-            Assert.That(() => new StringFirstPartTasks().ChangeLetterCase(str),
+            Assert.That(() => new StringTasks().ChangeLetterCase(str),
                         Throws.TypeOf<ArgumentException>());
         }
 
@@ -54,7 +54,7 @@ namespace TraineeTasks.UnitTests
         public void WhenFindLongestPalindromeSubstring_ThenReturnThisSubstring(string str, string expected)
         {
             // Arrange
-            var tasks = new StringFirstPartTasks();
+            var tasks = new StringTasks();
 
             // Act
             var actual = tasks.FindLongestPalindrome(str);
@@ -67,7 +67,7 @@ namespace TraineeTasks.UnitTests
         [TestCase(null)]
         public void WhenFindLongestPalindromeSubstring_ThenReturnThrows(string str)
         {
-            Assert.That(() => new StringFirstPartTasks().ChangeLetterCase(str),
+            Assert.That(() => new StringTasks().ChangeLetterCase(str),
                         Throws.TypeOf<ArgumentException>());
         }
 
@@ -77,7 +77,7 @@ namespace TraineeTasks.UnitTests
         public void WhenFindSubstring_ThenReturnCountTheseSubstrings(string str, string substr, int expected)
         {
             // Act
-            var actual = str.GetNumberOccurrences(substr);
+            var actual = str.GetNumberOfOccurrences(substr);
 
             // Assert
             Assert.That(actual, Is.EqualTo(expected));
@@ -87,7 +87,7 @@ namespace TraineeTasks.UnitTests
         [TestCase("234", null)]
         public void WhenFindSubstring_ThenReturnThrows(string str, string substr)
         {
-            Assert.That(() => str.GetNumberOccurrences(substr), Throws.TypeOf<ArgumentException>());
+            Assert.That(() => str.GetNumberOfOccurrences(substr), Throws.TypeOf<ArgumentException>());
         }
     }
 }

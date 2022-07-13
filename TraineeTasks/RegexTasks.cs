@@ -11,37 +11,23 @@ namespace TraineeTasks
         /// Find words in a string that contain the letter h, followed by 0 or 1 letter u.
         /// </summary>
         /// <param name="str"></param>
-        /// <returns>Returns a string of found words.</returns>
-        public string FindWords(string str)
+        /// <returns>Returns a collection of strings with found words.</returns>
+        public string[] FindWords(string str)
         {
-            if (String.IsNullOrEmpty(str))
+            if (string.IsNullOrWhiteSpace(str))
             {
                 throw new ArgumentException("The string cannot be null or empty string");
             }
 
-            var regex = new Regex(@"\w*h(u{0}|u{1})\w*", RegexOptions.IgnoreCase);
-            var matches = regex.Matches(str);
-            List<string> words = new List<string>();
-
-            foreach (Match item in matches)
-            {
-                if (!item.Value.Contains("uu"))
-                {
-                    words.Add(item.Value);
-                }
-            }
-
-            if (words.Count > 0)
-            {
-                return words.Aggregate(((i, j) => i + ", " + j));
-            }
-
-            return "There are no matches";
+            return Regex.Matches(str, @"\w*h[u]{0,1}[^u]\w*", RegexOptions.IgnoreCase)
+                .Cast<Match>()
+                .Select(m => m.Value)
+                .ToArray();
         }
 
-        public string ValidateBelarusianPhoneNumber(string phoneNumber)
+        public bool ValidateBelarusianPhoneNumber(string phoneNumber)
         {
-            if (String.IsNullOrEmpty(phoneNumber))
+            if (string.IsNullOrWhiteSpace(phoneNumber))
             {
                 throw new ArgumentException("The phone number cannot be null or empty string");
             }
@@ -51,31 +37,22 @@ namespace TraineeTasks
             Regex regex = new Regex(MatchPhonePattern, RegexOptions.IgnoreCase);
             MatchCollection matches = regex.Matches(phoneNumber);
 
-            if (matches.Count == 1)
-            {
-                return matches[0].Value;
-            }
-
-            return "It is not valid phone number";
+            return matches.Count == 1;
         }
 
-        public string ValidateURL(string url)
+        public bool ValidateURL(string url)
         {
-            if (String.IsNullOrEmpty(url))
+            if (string.IsNullOrWhiteSpace(url))
             {
                 throw new ArgumentException("The url cannot be null or empty string");
             }
+
             const string MatchPhonePattern =
             @"(http|https){1}://.+(.com|.uk|.us)$";
             Regex regex = new Regex(MatchPhonePattern, RegexOptions.IgnoreCase);
             MatchCollection matches = regex.Matches(url);
 
-            if (matches.Count == 1)
-            {
-                return matches[0].Value;
-            }
-
-            return "It is not valid url";
+            return matches.Count == 1;
         }
     }
 }

@@ -4,35 +4,22 @@ using System.Linq;
 
 namespace TraineeTasks
 {
-    public class StringFirstPartTasks
+    public class StringTasks
     {
         public string ChangeLetterCase(string str)
         {
-            if (String.IsNullOrEmpty(str))
+            if (string.IsNullOrWhiteSpace(str))
             {
                 throw new ArgumentException("The string cannot be null or empty string");
             }
 
-            var result = "";
-
-            for (int i = 0; i < str.Length; i++)
-            {
-                if (str[i].ToString().ToLower() == str[i].ToString())
-                {
-                    result += str[i].ToString().ToUpper();
-                }
-                else
-                {
-                    result += str[i].ToString().ToLower();
-                }
-            }
-
-            return result;
+            return new String(str.Select(ch => char.ToLower(ch) == ch ?
+                char.ToUpper(ch) : char.ToLower(ch)).ToArray());
         }
 
         public string ReverseEachWord(string str)
         {
-            if (String.IsNullOrEmpty(str))
+            if (string.IsNullOrWhiteSpace(str))
             {
                 throw new ArgumentException("The string cannot be null or empty string");
             }
@@ -60,7 +47,7 @@ namespace TraineeTasks
 
         public string FindLongestPalindrome(string str)
         {
-            if (String.IsNullOrEmpty(str))
+            if (string.IsNullOrWhiteSpace(str))
             {
                 throw new ArgumentException("The string cannot be null or empty string");
             }
