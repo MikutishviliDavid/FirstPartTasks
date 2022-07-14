@@ -12,13 +12,10 @@ namespace TraineeTasks.UnitTests
 #pragma warning restore NUnit1001 // The individual arguments provided by a TestCaseAttribute must match the type of the corresponding parameter of the method
         public void WhenFindWords_ThenReturnTheseWords(string str, string[] expected)
         {
-            // Arrange
             var tasks = new RegexTasks();
 
-            // Act
             var actual = tasks.FindWords(str);
 
-            // Assert
             Assert.That(actual, Is.EqualTo(expected));
         }
 
@@ -26,7 +23,9 @@ namespace TraineeTasks.UnitTests
         [TestCase(null)]
         public void WhenFindWords_ThenReturnThrows(string str)
         {
-            Assert.That(() => new RegexTasks().FindWords(str), Throws.TypeOf<ArgumentException>());
+            var tasks = new RegexTasks();
+
+            Assert.Throws<ArgumentException>(() => tasks.FindWords(str));
         }
 
         [TestCase("+375 25 555 55 55", true)]
@@ -35,13 +34,10 @@ namespace TraineeTasks.UnitTests
         [TestCase("+375 25 555 55 558", false)]
         public void WhenValidateBelarusianPhoneNumber_ThenReturnThisNumber(string phoneNumber, bool expected)
         {
-            // Arrange
             var tasks = new RegexTasks();
 
-            // Act
             var actual = tasks.ValidateBelarusianPhoneNumber(phoneNumber);
 
-            // Assert
             Assert.That(actual, Is.EqualTo(expected));
         }
 
@@ -49,7 +45,9 @@ namespace TraineeTasks.UnitTests
         [TestCase(null)]
         public void WhenValidateBelarusianPhoneNumber_ThenReturnThrows(string phoneNumber)
         {
-            Assert.That(() => new RegexTasks().ValidateBelarusianPhoneNumber(phoneNumber), Throws.TypeOf<ArgumentException>());
+            var tasks = new RegexTasks();
+
+            Assert.Throws<ArgumentException>(() => tasks.ValidateBelarusianPhoneNumber(phoneNumber));
         }
 
         [TestCase("https://metanit.com", true)]
@@ -57,21 +55,20 @@ namespace TraineeTasks.UnitTests
         [TestCase("https://docs.microsoft.ru", false)]
         public void WhenValidateURL_ThenReturnThisURL(string url, bool expected)
         {
-            // Arrange
             var tasks = new RegexTasks();
 
-            // Act
             var actual = tasks.ValidateURL(url);
 
-            // Assert
             Assert.That(actual, Is.EqualTo(expected));
         }
 
         [TestCase("")]
         [TestCase(null)]
-        public void WhenValidateURL_ThenReturnThrows(string phoneNumber)
+        public void WhenValidateURL_ThenReturnThrows(string url)
         {
-            Assert.That(() => new RegexTasks().ValidateURL(phoneNumber), Throws.TypeOf<ArgumentException>());
+            var tasks = new RegexTasks();
+
+            Assert.Throws<ArgumentException>(() => tasks.ValidateURL(url));
         }
     }
 }

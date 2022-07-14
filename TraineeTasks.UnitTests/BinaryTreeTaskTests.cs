@@ -11,7 +11,6 @@ namespace TraineeTasks.UnitTests
         [TestCase(new string[] { "h", "e", "l", "l", "o" }, 0)]
         public void WhenGetLeafSum_ThenReturnLeafSum(string[] nodeValues, int expectedLeafSum)
         {
-            // Arrange
             var tasks = new BinaryTreeTasks();
 
             int leafSum = 0;
@@ -19,14 +18,15 @@ namespace TraineeTasks.UnitTests
 
             var actualLeafSum = tasks.GetLeafSum(ref leafSum, node);
 
-            // Assert
             Assert.That(actualLeafSum, Is.EqualTo(expectedLeafSum));
         }
 
         [TestCase(null)]
         public void WhenIntilializeTree_ThenReturnThrows(string[] nodeValues)
         {
-            Assert.That(() => new BinaryTreeTasks().InitializeTree(nodeValues), Throws.TypeOf<ArgumentNullException>());
+            var tasks = new BinaryTreeTasks();
+
+            Assert.Throws<ArgumentNullException>(() => tasks.InitializeTree(nodeValues));
         }
     }
 }

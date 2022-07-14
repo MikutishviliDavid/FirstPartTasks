@@ -12,7 +12,7 @@ namespace TraineeTasks
                 throw new ArgumentException("The number must not be less than zero");
             }
 
-            return (int)(number & 0xaaaaaaaa);
+            return (int)(number & 0xAAAAAAAA);
         }
 
         public int FindCountBitsEqualOne(int number)
