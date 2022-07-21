@@ -13,8 +13,14 @@ namespace TraineeTasks
                 throw new ArgumentException("The string cannot be null or empty string");
             }
 
-            return new String(str.Select(ch => char.ToLower(ch) == ch ?
-                char.ToUpper(ch) : char.ToLower(ch)).ToArray());
+            var chars = str.Select(ReverseCharCase);
+
+            return string.Concat(chars);
+        }
+
+        private char ReverseCharCase(char ch)
+        {
+            return char.ToLower(ch) == ch ? char.ToUpper(ch) : char.ToLower(ch);
         }
 
         public string ReverseEachWord(string str)
@@ -24,25 +30,14 @@ namespace TraineeTasks
                 throw new ArgumentException("The string cannot be null or empty string");
             }
 
-            string[] words = str.Split(' ');
-            var result = "";
+            var reversedWords = str.Split(' ').Select(ReverseWord) ;
 
-            for (int i = 0; i < words.Length; i++)
-            {
-                char[] stringСharacters = words[i].ToCharArray();
-                Array.Reverse(stringСharacters);
+            return string.Join(' ', reversedWords);
+        }
 
-                if (i != words.Length - 1)
-                {
-                    result += new String(stringСharacters) + " ";
-                }
-                else
-                {
-                    result += new String(stringСharacters);
-                }
-            }
-
-            return result.ToLower();
+        private string ReverseWord(string str)
+        {
+            return string.Concat(str.Reverse());
         }
 
         public string FindLongestPalindrome(string str)
@@ -53,28 +48,26 @@ namespace TraineeTasks
             }
 
             string[] words = str.Split(' ');
-            var palindromeWords = new List<string>();
+            var longestPalindrome = string.Empty;
 
             foreach (var word in words)
             {
-                if (IsPalindrome(word))
+                if (IsPalindrome(word) && word.Length > longestPalindrome.Length)
                 {
-                    palindromeWords.Add(word);
+                    longestPalindrome = word;
                 }
             }
 
-            return palindromeWords.Aggregate("", (max, cur) => max.Length > cur.Length ? max : cur);
+            return longestPalindrome;
         }
 
         private bool IsPalindrome(string str)
         {
-            string first = str.Substring(0, str.Length / 2);
-            char[] stringСharacters = str.ToCharArray();
+            var first = str.Substring(0, str.Length / 2);
 
-            Array.Reverse(stringСharacters);
+            var reversedStr = string.Concat(str.Reverse());
 
-            string temp = new string(stringСharacters);
-            string second = temp.Substring(0, temp.Length / 2);
+            string second = reversedStr.Substring(0, reversedStr.Length / 2);
 
             return first.Equals(second);
         }

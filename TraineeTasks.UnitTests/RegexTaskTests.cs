@@ -7,7 +7,7 @@ namespace TraineeTasks.UnitTests
     {
 #pragma warning disable NUnit1001 // The individual arguments provided by a TestCaseAttribute must match the type of the corresponding parameter of the method
         [TestCase("aahhuaa aahaa aahuuaa dggd ahuhu", new string[] { "aahhuaa", "aahaa", "ahuhu" })]
-        [TestCase("aahHUaa aaHaa aahuuaa dggd", new string[] { "aahHUaa", "aaHaa" })]
+        [TestCase("aahhuaa aahaa aahuuaa dggd", new string[] { "aahhuaa", "aahaa" })]
         [TestCase("dggd", new string[] { })]
 #pragma warning restore NUnit1001 // The individual arguments provided by a TestCaseAttribute must match the type of the corresponding parameter of the method
         public void WhenFindWords_ThenReturnTheseWords(string str, string[] expected)
@@ -57,7 +57,7 @@ namespace TraineeTasks.UnitTests
         {
             var tasks = new RegexTasks();
 
-            var actual = tasks.ValidateURL(url);
+            var actual = tasks.ValidateUrl(url);
 
             Assert.That(actual, Is.EqualTo(expected));
         }
@@ -68,7 +68,7 @@ namespace TraineeTasks.UnitTests
         {
             var tasks = new RegexTasks();
 
-            Assert.Throws<ArgumentException>(() => tasks.ValidateURL(url));
+            Assert.Throws<ArgumentException>(() => tasks.ValidateUrl(url));
         }
     }
 }

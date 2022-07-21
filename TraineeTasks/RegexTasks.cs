@@ -12,17 +12,15 @@ namespace TraineeTasks
         /// </summary>
         /// <param name="str"></param>
         /// <returns>Returns a collection of strings with found words.</returns>
-        public string[] FindWords(string str)
+        public IEnumerable<string> FindWords(string str)
         {
             if (string.IsNullOrWhiteSpace(str))
             {
                 throw new ArgumentException("The string cannot be null or empty string");
             }
 
-            return Regex.Matches(str, @"\w*h[u]{0,1}[^u]\w*", RegexOptions.IgnoreCase)
-                .Cast<Match>()
-                .Select(m => m.Value)
-                .ToArray();
+            return Regex.Matches(str, @"\w*h[u]{0,1}[^u]\w*")
+                .Select(m => m.Value);
         }
 
         public bool ValidateBelarusianPhoneNumber(string phoneNumber)
@@ -32,27 +30,23 @@ namespace TraineeTasks
                 throw new ArgumentException("The phone number cannot be null or empty string");
             }
 
-            const string MatchPhonePattern =
-            @"\+375\s(29|33|44|25){1}\s\d{3}\s\d{2}\s\d{2}$";
-            Regex regex = new Regex(MatchPhonePattern, RegexOptions.IgnoreCase);
-            MatchCollection matches = regex.Matches(phoneNumber);
+            const string pattern = @"\+375\s(29|33|44|25){1}\s\d{3}\s\d{2}\s\d{2}$";
+            Regex regex = new Regex(pattern);
 
-            return matches.Count == 1;
+            return regex.IsMatch(phoneNumber);
         }
 
-        public bool ValidateURL(string url)
+        public bool ValidateUrl(string url)
         {
             if (string.IsNullOrWhiteSpace(url))
             {
                 throw new ArgumentException("The url cannot be null or empty string");
             }
 
-            const string MatchPhonePattern =
-            @"(http|https){1}://.+(.com|.uk|.us)$";
-            Regex regex = new Regex(MatchPhonePattern, RegexOptions.IgnoreCase);
-            MatchCollection matches = regex.Matches(url);
+            const string pattern = @"(http|https){1}://.+(.com|.uk|.us)$";
+            Regex regex = new Regex(pattern);
 
-            return matches.Count == 1;
+            return regex.IsMatch(url);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using System;
+using TraineeTasks.BinaryTreeTasks;
 
 namespace TraineeTasks.UnitTests
 {
@@ -11,7 +12,7 @@ namespace TraineeTasks.UnitTests
         [TestCase(new string[] { "h", "e", "l", "l", "o" }, 0)]
         public void WhenGetLeafSum_ThenReturnLeafSum(string[] nodeValues, int expectedLeafSum)
         {
-            var tasks = new BinaryTreeTasks();
+            var tasks = new BinaryTreeActions();
 
             int leafSum = 0;
             var node = tasks.InitializeTree(nodeValues);
@@ -24,7 +25,7 @@ namespace TraineeTasks.UnitTests
         [TestCase(null)]
         public void WhenIntilializeTree_ThenReturnThrows(string[] nodeValues)
         {
-            var tasks = new BinaryTreeTasks();
+            var tasks = new BinaryTreeActions();
 
             Assert.Throws<ArgumentNullException>(() => tasks.InitializeTree(nodeValues));
         }
